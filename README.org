@@ -1,0 +1,22 @@
+#+TITLE: Wii Balance Board Scale
+
+* Wut?
+Use a Wii Balance Board as a bathroom scale.. The idea isn't new:
+[[Related Work]]. This implementation uses the wiimote Linux Kernel driver with the
+xwiimote library.
+
+* Related work
+- [[http://www.stavros.io/posts/your-weight-online/][DIY internet-enabled bathroom scale by Stavros Korokithakis]]
+- [[http://www.mattcutts.com/blog/internet-connected-scale-wii-balance-board-linux/][Cheap internet-connected scale: Wii Balance Board + Linux by Matt Cutts]]
+- [[https://github.com/paulburton/fitscales][FitScales Android App by @paulburton]]
+
+* Dependencies
+- xwiimote with balanceboard support. I build mine from git
+- Linux kernel with wiimote module + balanceboard support (Linux >=
+  3.7)
+
+* TASKS
+** TODO implement storage backend
+- graphite
+- append only file
+** TODO tweak ring buffer size, stddev threasholds
