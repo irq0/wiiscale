@@ -10,6 +10,8 @@ import select
 import numpy
 import xwiimote
 
+import util
+
 class RingBuffer():
     def __init__(self, length):
         self.length = length
@@ -132,8 +134,19 @@ def main():
 #        for m in measurements(iface):
 #            print_bboard_measurements(*m)
 
-        for m in average_mesurements(measurements(iface)):
-            print(m)
+        for kg, err in average_mesurements(measurements(iface)):
+            pkg = "qme.seri.wiiweight.weight"
+            perr = "qme.seri.wiiweight.err"
+
+            print("{:.2f} +/- {:.2f}".format(kg/100.0, err/100.0))
+
+            kg, err = (int(round(x, 0)) for x in (kg, err))
+
+            for d, p in zip((kg, err), (pkg, perr)):
+                print(d, p)
+                util.submit(p, d)
+
+            sys.exit(0)
 
 
     except KeyboardInterrupt:
