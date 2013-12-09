@@ -36,19 +36,23 @@ def wait_for_balanceboard():
 
     return dev
 
+def format_measurement(x):
+    return "{0:.2f}".format(x / 100.0)
 
-def print_bboard_measurements(tl, tr, bl, br):
-        print("┌","─" * 10, "┬", "─" * 10, "┐", sep="")
-        print("│{:^10}│{:^10}│".format(tl, tr))
-        print("│"," " * 10, "│", " " * 10, "│", sep="")
-        print("│"," " * 10, "│", " " * 10, "│", sep="")
-        print("│{:^10}│{:^10}│".format(bl, br))
-        print("└","─" * 10, "┴", "─" * 10, "┘", sep="")
-        print("{:^24}".format(sum((tl,tr,br,bl))))
+def print_bboard_measurements(*args):
+    sm = format_measurement(sum(args))
+    tl, tr, bl, br = map(format_measurement, args)
+    print("┌","─" * 21, "┐", sep="")
+    print("│"," " * 8, "{:>5}".format(sm)," " * 8, "│", sep="")
+    print("├","─" * 10, "┬", "─" * 10, "┤", sep="")
+    print("│{:^10}│{:^10}│".format(tl, tr))
+    print("│"," " * 10, "│", " " * 10, "│", sep="")
+    print("│"," " * 10, "│", " " * 10, "│", sep="")
+    print("│{:^10}│{:^10}│".format(bl, br))
+    print("└","─" * 10, "┴", "─" * 10, "┘", sep="")
 
-        print()
-        print()
-
+    print()
+    print()
 
 
 def event_loop(iface):
@@ -67,6 +71,7 @@ def event_loop(iface):
         sm = sum((tl, tr, br, bl))
 
         print_bboard_measurements(tl, tr, br, bl)
+
 
 def main():
 
