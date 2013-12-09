@@ -15,8 +15,14 @@ xwiimote library.
 - Linux kernel with wiimote module + balanceboard support (Linux >=
   3.7)
 
-* TASKS
-** TODO implement storage backend
+* Features
+** Wait for Balance Board to connect
+** Output measurement events
+*** TODO add commandline switch for /live data/ mode
+** Average last n measurement events
+Implemented using python generators. After > 800 measurements and a
+standard deviation smaller than 50 gramms emit averaged measurement.
+
+** Submit measurements
 - graphite
-- append only file
-** TODO tweak ring buffer size, stddev threasholds
+- append to file
